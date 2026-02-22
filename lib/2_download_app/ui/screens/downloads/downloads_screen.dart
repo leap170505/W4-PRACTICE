@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../providers/theme_color_provider.dart';
 import '../../theme/theme.dart';
 import 'widgets/download_controler.dart';
+import 'widgets/download_tile.dart';
 
 
 class DownloadsScreen extends StatelessWidget {
@@ -24,7 +25,7 @@ class DownloadsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: currentThemeColor.backgroundColor,
+      color: themeProvider.currentTheme.backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -32,13 +33,20 @@ class DownloadsScreen extends StatelessWidget {
           Text(
             "Downloads",
             style: AppTextStyles.heading.copyWith(
-              color: currentThemeColor.color,
+              color: themeProvider.currentTheme.color,
             ),
           ),
 
           SizedBox(height: 50),
 
           // TODO - Add the Download tiles
+          Expanded(
+            child: ListView(
+              children: controllers
+                  .map((controller) => DownloadTile(controller: controller))
+                  .toList(),
+            ),
+          ),
         ],
       ),
     );
